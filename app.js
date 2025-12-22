@@ -12,7 +12,7 @@ const sessionMiddleware = require("./src/middlewares/session");
 const symptomsRoutes = require("./src/routes/symptomsRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const healthRecordsRoutes = require("./src/routes/healthRecordsRoutes");
-
+const PORT = process.env.PORT || 8080;
 
 const app = express();
 const server = http.createServer(app);
@@ -184,7 +184,7 @@ io.on("connection", (socket) => {
 
 
 dbConnect(() => {
-  server.listen(8080, () => {
+  server.listen(PORT, () => {
     console.log("🚀 Server listening at http://localhost:8080");
   });
 });
