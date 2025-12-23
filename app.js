@@ -18,7 +18,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://healthcare-advisor-frontend-hzr1sqi11.vercel.app/",
+    origin: "https://healthcare-advisor-frontend-hzr1sqi11.vercel.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -29,7 +29,7 @@ const io = new Server(server, {
 app.use(sessionMiddleware);
 app.use(
   cors({
-    origin: "https://healthcare-advisor-frontend-hzr1sqi11.vercel.app/",
+    origin: "https://healthcare-advisor-frontend-hzr1sqi11.vercel.app",
     credentials: true,
   })
 );
