@@ -16,9 +16,20 @@ const PORT = process.env.PORT || 8080;
 
 const app = express();
 const server = http.createServer(app);
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://healthcare-advisor-frontend.vercel.app",
+  "https://healthcare-advisor-frontend-hzr1sqi11.vercel.app",
+];
+
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin:  [
+      "http://localhost:5173",
+      "https://healthcare-advisor-frontend.vercel.app",
+      "https://healthcare-advisor-frontend-hzr1sqi11.vercel.app",
+    ],
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -29,7 +40,13 @@ const io = new Server(server, {
 app.use(sessionMiddleware);
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
