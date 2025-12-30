@@ -20,7 +20,6 @@ const server = http.createServer(app);
 const allowedOrigins = [
   "http://localhost:5173",
   "https://healthcare-advisor-frontend.vercel.app",
-  "https://healthcare-advisor-frontend-hzr1sqi11.vercel.app",
 ];
 
 const io = new Server(server, {
@@ -28,7 +27,6 @@ const io = new Server(server, {
     origin:  [
       "http://localhost:5173",
       "https://healthcare-advisor-frontend.vercel.app",
-      "https://healthcare-advisor-frontend-hzr1sqi11.vercel.app",
     ],
     methods: ["GET", "POST"],
     credentials: true,
