@@ -20,7 +20,7 @@ const sessionMiddleware = session({
   cookie: {
     httpOnly: true,
     secure: true,        // true if you serve over HTTPS
-    sameSite: none,      // 'lax' is fine for localhost; use 'none' + secure:true for cross-site
+    sameSite: 'none',      // 'lax' is fine for localhost; use 'none' + secure:true for cross-site
     maxAge: 1000 * 60 * 60 * 24, // 1 day
   },
 })
