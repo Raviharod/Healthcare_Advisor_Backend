@@ -37,6 +37,7 @@ const io = new Server(server, {
 
 
 // Middleware
+app.use(express.json());
 app.use(sessionMiddleware);
 app.use(
   cors({
@@ -199,6 +200,6 @@ io.on("connection", (socket) => {
 
 dbConnect(() => {
   server.listen(PORT, () => {
-    console.log("🚀 Server listening at http://localhost:8080");
+    console.log(`🚀 Server listening at http://localhost:${PORT}`);
   });
 });
