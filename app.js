@@ -15,6 +15,7 @@ const healthRecordsRoutes = require("./src/routes/healthRecordsRoutes");
 const PORT = process.env.PORT || 8080;
 
 const app = express();
+app.set("trust proxy", 1);
 const server = http.createServer(app);
 
 const allowedOrigins = [
