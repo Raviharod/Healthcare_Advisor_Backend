@@ -20,14 +20,14 @@ const server = http.createServer(app);
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "healthcare-advisor-frontend-updated.vercel.app",
+  "https://healthcare-advisor-frontend-updated.vercel.app",
 ];
 
 const io = new Server(server, {
   cors: {
     origin:  [
       "http://localhost:5173",
-      "healthcare-advisor-frontend-updated.vercel.app",
+      "https://healthcare-advisor-frontend-updated.vercel.app",
     ],
     methods: ["GET", "POST"],
     credentials: true,
