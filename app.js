@@ -20,14 +20,14 @@ const server = http.createServer(app);
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://healthcare-advisor-frontend.vercel.app",
+  "healthcare-advisor-frontend-updated.vercel.app",
 ];
 
 const io = new Server(server, {
   cors: {
     origin:  [
       "http://localhost:5173",
-      "https://healthcare-advisor-frontend.vercel.app",
+      "healthcare-advisor-frontend-updated.vercel.app",
     ],
     methods: ["GET", "POST"],
     credentials: true,
@@ -103,11 +103,6 @@ io.on("connection", (socket) => {
     }
   })
 
-  socket.on("join-room", (roomId) => {
-    socket.join(roomId);
-    socket.to(roomId).emit("user-joined", socket.id);
-  });
-
   socket.on("offer", (data) => {
     const { invitationData } = data;
     const { doctorSocketId } = invitationData;
@@ -152,7 +147,7 @@ io.on("connection", (socket) => {
     console.log("Invitation accepted from doctor ,", doctorSocketId);
     
     // Notify patient that invitation was accepted
-    io.to(patientSocketId).emit("video-invitation-accepted", {
+    io.to(patientSocketId).emit("video-invitation-accepted-by-doctor", {
       doctorName,
       doctorSocketId,
     });
@@ -166,9 +161,9 @@ io.on("connection", (socket) => {
   socket.on("start-video-call", (data) => {
     const { patientSocketId, doctorName, doctorSocketId } = data;
     console.log("Starting video call...");
-    io.to(patientSocketId).emit("start-video-call", {
+    io.to(patientSocketId).emit("start-video-call-by-doctor", {
       patientSocketId,
-      doctorName,
+      doctorName, 
       doctorSocketId,
     });
   });
@@ -178,7 +173,7 @@ io.on("connection", (socket) => {
     console.log("Invitation rejected by doctor:", doctorName);
     
     // Notify patient that invitation was rejected
-    io.to(patientSocketId).emit("video-invitation-rejected", {
+    io.to(patientSocketId).emit("video-invitation-rejected-by-doctor", {
       doctorName
     });
   });
